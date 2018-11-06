@@ -3,13 +3,13 @@
 #
 
 library(shiny)
+library(dplyr)
 library(shinythemes)
 library(glue)
 library(lime)
 library(billboarder)
 
-pred <- readRDS("data/lime_prediction_results.RDS")
-application_data <- readRDS("data/application_data.RDS")
+source("data/appData.R")
 
 ui <- fluidPage(
     theme = shinytheme("simplex"),
@@ -27,7 +27,6 @@ ui <- fluidPage(
             HTML('<center><p>Shiny in Production Workshop 2019</p></center>')
         ),
 
-        # Show a plot of the generated distribution
         mainPanel(
             tabsetPanel(
                 tabPanel("LIME Feature Plot", billboarderOutput("limeStudent")),
@@ -54,15 +53,14 @@ server <- function(input, output) {
     })
     
     output$major <- renderText({
-        glue('<h4 style="font-weight:bold;">Major: </h4><p>{application_data[obs_row(),]$major}</p>') %>% HTML
+        glue('<h4 style="font-weight:bold;">Major: </h4><p>{application_data[input$student,]$major}</p>') %>% HTML
     })
     
     output$minor <- renderText({
-        glue('<h4 style="font-weight:bold;">Minor: </h4><p>{application_data[obs_row(),]$minor}</p>') %>% HTML
+        glue('<h4 style="font-weight:bold;">Minor: </h4><p>{application_data[input$student,]$minor}</p>') %>% HTML
     })
     
     output$limeStudent <- renderBillboarder({
-        #plot_features(pred[[obs_row()]])
         prediction_data <- pred[[obs_row()]] %>% select(feature_desc, feature_weight, risk_predictor)
         billboarder() %>%
             bb_barchart(
