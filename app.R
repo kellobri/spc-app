@@ -8,7 +8,8 @@ library(glue)
 library(lime)
 library(billboarder)
 
-pred <- readRDS("lime_prediction_results.RDS")
+pred <- readRDS("data/lime_prediction_results.RDS")
+application_data <- readRDS("data/application_data.RDS")
 
 ui <- fluidPage(
     theme = shinytheme("simplex"),
