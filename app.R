@@ -61,11 +61,13 @@ server <- function(input, output) {
     })
     
     output$limeStudent <- renderBillboarder({
-        prediction_data <- pred[[obs_row()]] %>% select(feature_desc, feature_weight, risk_predictor)
+        prediction_data <- pred[[obs_row()]] %>% 
+            select(feature_desc, feature_weight, risk_predictor) %>%
+            mutate(pretty_features = gsub("_", " ", feature_desc))
         billboarder() %>%
             bb_barchart(
                 data = prediction_data,
-                mapping = bbaes(x = feature_desc, y = feature_weight, group = risk_predictor),
+                mapping = bbaes(x = pretty_features, y = feature_weight, group = risk_predictor),
                 rotated = TRUE,
                 stacked = TRUE
             ) %>%
