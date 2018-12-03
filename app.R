@@ -98,7 +98,6 @@ server <- function(input, output) {
         HTML(glue('<h4 style="font-weight:bold;">Minor: </h4><p>{student_data()$minor}</p>'))
     })
     
-<<<<<<< HEAD
     output$limeStudent <- renderPlot({
         explain_risk(student_data()) %>% 
             select(feature, feature_weight) %>% 
