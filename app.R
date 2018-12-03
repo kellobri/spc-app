@@ -23,14 +23,14 @@ source('use_models.R', local = FALSE)
 
 # create a pool of connections to our student database
 db <- get('database')
-    pool <- dbPool(
-          odbc::odbc(),
-          Driver   =  db$Driver,
-          Server   =  db$Server,
-          Database =  db$Database,
-          UID      =  db$UID,
-          PWD      =  db$PWD,
-          Port     =  db$Port
+pool <- dbPool(
+  odbc::odbc(),
+  Driver   =  db$Driver,
+  Server   =  db$Server,
+  Database =  db$Database,
+  UID      =  db$UID,
+  PWD      =  db$PWD,
+  Port     =  db$Port
 )
 onStop(function(){
     poolClose(pool)

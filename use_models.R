@@ -49,6 +49,7 @@ predict_risk <- function(student) {
 }
 
 explain_risk <- function(student) {
+  #set.seed(33)
   lime::explain(
     x = preprocess_student(student),
     model_explainer,

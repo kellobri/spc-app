@@ -12,7 +12,7 @@ rsconnect:
       Driver: PostgreSQL
       Server: 'sol-eng-shiny-prod-class.cihykudhzbgw.us-west-2.rds.amazonaws.com'
       Database:  'students'
-      UID:  'replace this'
-      PWD:  'and this'
+      UID:  'rstudioadmin'
+      PWD:  'replace this'
       Port:  5432
     

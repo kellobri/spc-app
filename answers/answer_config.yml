@@ -1,0 +1,18 @@
+default:
+  database:
+      Driver: PostgreSQL
+      Server: 'sol-eng-shiny-prod-class.cihykudhzbgw.us-west-2.rds.amazonaws.com'
+      Database:  'students'
+      UID:  'rstudioadmin'
+      PWD:  'rstudioadmin'
+      Port:  5432
+      
+rsconnect:
+  database:
+      Driver: PostgreSQL
+      Server: 'sol-eng-shiny-prod-class.cihykudhzbgw.us-west-2.rds.amazonaws.com'
+      Database:  'students'
+      UID:  'rstudioadmin'
+      PWD:  !expr Sys.getenv('DBPWD')
+      Port:  5432
+    

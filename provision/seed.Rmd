@@ -1,0 +1,25 @@
+--- 
+title: Seed RStudio Connect Packages
+---
+You can safely ignore this report. It was used 
+to warm up the RStudio Connect package cache
+so that deployment during the class was fast.
+
+```{r setup}
+library( shiny )
+library( dplyr )
+library( tidyr )
+library( shinythemes )
+library( glue )
+library( lime )
+library( ggplot2 )
+library( parsnip )
+library( recipes )
+library( pool )
+library( odbc )
+library( DBI )
+library( stringr )
+library( gt )
+library( xgboost )
+library( config )
+```

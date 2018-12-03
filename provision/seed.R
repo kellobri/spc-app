@@ -1,0 +1,26 @@
+options(repos =c(
+  internal = 'http://demo.rstudiopm.com/internal/521',
+  CRAN = 'http://demo.rstudiopm.com/cran/521',
+  RSPM = 'http://demo.rstudiopm.com/cran/521'
+))
+install.packages(" shiny ")
+install.packages(" dplyr ")
+install.packages(" tidyr ")
+install.packages(" shinythemes ")
+install.packages(" glue ")
+install.packages(" lime ")
+install.packages(" ggplot2 ")
+install.packages(" parsnip ")
+install.packages(" recipes ")
+install.packages(" pool ")
+install.packages(" odbc ")
+install.packages(" DBI ")
+install.packages(" stringr ")
+install.packages(" gt ")
+install.packages(" xgboost ")
+install.packages(" config ")
+install.packages(" shinyloadtest ")
+install.packages(" shinytest ")
+install.packages(" profvis ")
+install.packages(" shinyreactlog ")
+install.packages(" rstudioapi ")
