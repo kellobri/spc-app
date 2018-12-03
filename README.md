@@ -24,10 +24,6 @@ provision - Contains information about the package environment used for the cour
 
 #### TODO 
 
-- [ ] Create slower version of app (and check profvis)
-- [ ] Create testable version 
-- [ ] Check load test
-- [ ] Create cached plot version and verify speedup
 - [ ] Pull out model into plumber API / report
 
 
