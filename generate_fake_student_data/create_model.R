@@ -52,17 +52,17 @@ test_results <- test %>%
 
 test_results %>% roc_auc(truth, estimate)
 test_results %>% accuracy(truth, risk)
-
+ 
 
 # update parsnip model for use with lime
-predict_model.model_fit <- function(x, newdata, type, ...) {
-  switch(type,
-    raw = predict_class(x, newdata),
-    prob = predict_classprob(x, newdata)
-  )
-}
-
-model_type.model_fit <- function(x, ...) 'classification'
+# predict_model.model_fit <- function(x, newdata, type, ...) {
+#   switch(type,
+#     raw = predict_class(x, newdata),
+#     prob = predict_classprob(x, newdata)
+#   )
+# }
+# 
+# model_type.model_fit <- function(x, ...) 'classification'
 
 
 

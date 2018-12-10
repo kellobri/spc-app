@@ -4,15 +4,15 @@ model <- readRDS('model.RDS')
 model_explainer <- readRDS('model_explainer.RDS')
 
 # classes needed for lime to work with our parsnip model
-predict_model.model_fit <- function(x, newdata, type, ...) {
-  switch(type,
-         raw = predict_class(x, newdata),
-         prob = predict_classprob(x, newdata)
-  )
-}
-model_type.model_fit <- function(x, ...) {
-  'classification'
-}
+# predict_model._xgb.Booster <- function(x, newdata, type, ...) {
+#   switch(type,
+#          raw = predict_class(x, newdata),
+#          prob = predict_classprob(x, newdata)
+#   )
+# }
+# model_type._xgb.Booster <- function(x, ...) {
+#   'classification'
+# }
 
 # helper functions for calling models
 booleans <- function() {
