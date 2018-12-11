@@ -15,4 +15,3 @@ rsconnect:
       UID:  'rstudioadmin'
       PWD:  'replace this'
       Port:  5432
-    
