@@ -1,0 +1,124 @@
+---
+title: "Student Risk"
+output:
+  html_document:
+    theme: simplex
+params:
+  student_id: 1
+---
+
+```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE
+)
+#
+# Shiny in production course
+#
+
+library(dplyr)
+library(tidyr)
+library(glue)
+library(lime)
+library(ggplot2)
+library(parsnip)
+library(recipes)
+library(odbc)
+library(DBI)
+library(stringr)
+library(gt)
+library(xgboost)
+library(config)
+
+source('use_models.R', local = FALSE)
+
+# create a pool of connections to our student database
+db <- get('database')
+con <- dbConnect(
+  odbc::odbc(),
+  Driver   =  db$Driver,
+  Server   =  db$Server,
+  Database =  db$Database,
+  UID      =  db$UID,
+  PWD      =  db$PWD,
+  Port     =  db$Port
+)
+```
+
+Report for student `r params$student_id` generated on `r Sys.Date()`.
+
+```{r}
+student_data <- 
+  tbl(con, "students") %>% 
+  filter(student_id == params$student_id) %>% 
+  collect()
+
+risk_pred <- predict_risk(student_data)
+risk <- ifelse(risk_pred == 'No', 'Low', 'Elevated')
+```
+
+### Summary
+
+<b>Student Risk: `r risk`</b>
+
+Major: `r student_data$major`
+
+Minor: `r student_data$minor`
+  
+
+    
+### Understanding Student Risk Predicution
+
+```{r}
+explain_risk(student_data) %>% 
+  select(feature, feature_weight) %>% 
+  mutate(feature = str_to_title(str_replace_all(feature, "_", " ")),
+         color = ifelse(feature_weight >0, 'Increasing Risk','Decreasing Risk')) %>% 
+  ggplot(aes(reorder(feature, feature_weight), feature_weight, fill = color)) +
+  geom_bar(stat = "identity") + 
+  coord_flip() + 
+  theme_minimal() + 
+  scale_fill_manual(values = c("#417fe2", '#7f1c2e')) + 
+  labs(
+      title = 'Contributions to Risk Rating',
+      x = NULL,
+      y = NULL,
+      fill = NULL
+  )
+
+```
+    
+    
+    
+How this student compares with others:
+  
+```{r}
+avg_data <- tbl(con, "students") %>% 
+    select(-!!booleans(), -major, -minor, -student_id) %>% 
+    mutate_all(as.numeric) %>% 
+    summarise_all(mean) %>% 
+    collect() %>% 
+    gather("Attribute", "Average")
+        
+student_data %>% 
+    select(-student_id, -major,-minor, -!!booleans()) %>% 
+    gather("Attribute", "Student") %>%
+    left_join(avg_data) %>% 
+    mutate_if(is.character, ~str_to_title(str_replace_all(.,"_", " "))) %>% 
+    gt() %>% 
+    fmt_number(c("Student", "Average"))
+```
+
+
+
+This student's current involvement:
+  
+```{r}
+student_data %>%
+      select(booleans()) %>% 
+      gather("Attribute", "Student") %>% 
+      mutate_if(is.character, ~str_to_title(str_replace_all(.,"_", " "))) %>% 
+      gt() %>% 
+      fmt("Student",fns = function(x){ifelse(x, "Yes", "No")})
+```
