@@ -1,7 +1,20 @@
 library(shinyloadtest)
 
+# -------------------
+# Pre-Run Checklist!
+# -------------------
+
+# [] In use_models.R, un-comment the set.seed call on line 52
+# [] Redeploy your app to RStudio Connect
+# [] Make sure your app's access is set to "Anyone - no login"
+# [] Log out of RStudio Connect 
+
+# -------------------
+# Steps to Run
+# -------------------
+
 # replace with the (...) -> Open Solo URL for your app
-deployed_app_url <- 'http://colorado.rstudio.com/rsc/content/1703/'
+deployed_app_url <- 'REPLACE ME'
 
 # first record our app
 record_session(deployed_app_url)
@@ -33,9 +46,18 @@ loadtest <- load_runs(
 
 shinyloadtest_report(loadtest)
 
-#----------
-# STOP and update your app to use renderCachedPlot
-#----------
+# ----------
+# STOP 
+# We will update our app to use renderCachedPlot
+# ----------
+
+# ----------
+# Pre-Run Checklist
+# ----------
+
+# [] Did you redeploy your app?
+# [] Are you still logged out of RStudio Connect?
+
 
 # run our second 25 user test with the cache'd version
 cmd <- glue::glue(
@@ -56,10 +78,17 @@ loadtest <- load_runs(
 shinyloadtest_report(loadtest)
 
 #----------
-# STOP and update your app to use different 
-# RSC runtime settings
-# (Remember to sign out of RSC again before running load test)
+# STOP 
+# We will update the RSC runtime settings for our app
 #----------
+
+# ----------
+# Pre-Run Checklist
+# ----------
+
+# [] Did you update your settings?
+# []Log out of RStudio Connect again... (I know, I know)
+
 
 # run our third 25 user test with the cache'd version & more R procs
 cmd <- glue::glue(
