@@ -1,10 +1,12 @@
 ---
 title: "Student Risk"
+params:
+  student_id: 1
+resource_files:
+- config.yml
 output:
   html_document:
     theme: simplex
-params:
-  student_id: 1
 ---
 
 ```{r setup, echo = FALSE, message=FALSE, warning=FALSE}
@@ -18,6 +20,7 @@ knitr::opts_chunk$set(
 #
 
 library(dplyr)
+library(dbplyr)
 library(tidyr)
 library(glue)
 library(lime)
