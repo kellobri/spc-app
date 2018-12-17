@@ -7,6 +7,7 @@ library(shinyloadtest)
 # [] In use_models.R, un-comment the set.seed call on line 52
 # [] Redeploy your app to RStudio Connect
 # [] Make sure your app's access is set to "Anyone - no login"
+# [] Record the (...) -> Open Solo URL for your app (line 18 below)
 # [] Log out of RStudio Connect 
 
 # -------------------
