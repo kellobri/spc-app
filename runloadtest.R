@@ -17,7 +17,11 @@ library(shinyloadtest)
 # replace with the (...) -> Open Solo URL for your app
 deployed_app_url <- 'REPLACE ME'
 
-# first record our app
+# first record our app:
+# 1) Run this command
+# 2) Interact with the app as the user would (pause to view understand the results)
+# 3) Browse for at least 3 minutes
+# 4) Close the tab
 record_session(deployed_app_url)
 
 
