@@ -20,6 +20,7 @@ library(xgboost)
 library(config)
 
 source('use_models.R', local = FALSE)
+shinyOptions(cache = diskCache("./cache-dir"))
 
 # create a pool of connections to our student database
 db <- get('database')
