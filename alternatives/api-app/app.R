@@ -70,6 +70,7 @@ ui <- fluidPage(
 
 server <- function(input, output) {
     student_data <- reactive({
+      req(input$student)
         pool %>% 
             tbl("students") %>% 
             filter(student_id == input$student) %>% 
