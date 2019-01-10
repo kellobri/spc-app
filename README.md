@@ -22,5 +22,4 @@ A rough directory structure is:
 
 `provision`:  Contains information about the package environment used for the course
 
-
-//TODO Link to slides and resource cheatsheet
+Finally, `Shiny in Production.pdf` contains the course slides.
